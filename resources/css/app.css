@@ -1,0 +1,51 @@
+.active {
+    background: rgb(17, 128, 17);
+  }
+
+.tournamentName {
+  font-size: 25px;
+}
+
+.combatState {
+  height: 50px;
+  margin: auto 15px auto 0px;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.combatNames {
+  font-size: 18px;
+}
+
+.combatPrepared {
+  border-color: green;
+}
+
+.combatExecuting {
+  border-color: rgb(222, 236, 13);
+}
+
+.combatFinished {
+  border-color: rgb(241, 4, 4);
+}
+
+.combatNotices {
+  height: 30px;
+  border: 1px solid yellow;
+}
+
+.combatPoints {
+  font-size: 35px;
+}
+
+.combatDoubles {
+  font-size: 25px;
+}
+
+.combatTime {
+  font-size: 25px;
+}
+
+.testBorder {
+  border: 5px solid #C00; 
+}

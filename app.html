@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
+  <link href="./lib/materialdesignicons/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="./lib/vuetify/vuetify-v2.6.2.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+  <link rel="icon" href="favicon.ico" type="image/png" />
+  <link rel="manifest" href="manifest.json">
+
+  <!-- librerias -->
+  <script src="./lib/moment/moment.min.js"></script>
+  <script src="./lib/pouchdb/pouchdb-7.2.1.min.js"></script>
+  <script src="./lib/pouchdb/pouchdb.find.min.js"></script>
+
+  <!-- propias -->
+  <link href="./resources/css/app.css" rel="stylesheet">
+  <script src="./resources/js/app-utils.js"></script>
+  <script src="./resources/js/app-db.js"></script>
+  <script src="./resources/js/app-svc.js"></script>
+
+</head>
+<body>
+  <div id="app">
+
+	<div class="text-center" v-if="!app.initialized">
+		<v-progress-circular indeterminate color="primary"></v-progress-circular>
+	</div>
+	<div v-if="app.initialized">
+
+		<v-app>
+		<v-main>
+			<v-container>
+				<!-- barra de la aplicacion -->
+				<v-row class="mb-3" v-if="flow.header">
+					<v-app-bar color="red" dense elevation="4" outlined rounded>
+						<v-app-bar-nav-icon @click="setState('menu')"></v-app-bar-nav-icon>
+						<v-toolbar-title>Sala de Armas Fenix</v-toolbar-title>
+					</v-app-bar>
+				</v-row>
+				
+				<!-- Opciones de menu -->
+				<v-navigation-drawer v-model="flow.state.menu" absolute temporary>
+					<!-- opciones posibles -->
+					<v-list nav dense>
+						<v-list-item-group active-class="red--text text--accent-4">
+							<!-- inicio de la aplicación -->
+							<v-list-item @click="setState('welcome')">
+								<v-list-item-icon><v-icon>mdi-home-circle</v-icon></v-list-item-icon><v-list-item-title>Inicio</v-list-item-title>
+							</v-list-item>
+							<!-- Crear torneos -->
+							<v-list-item @click="setState('create')">
+								<v-list-item-icon><v-icon>mdi-playlist-edit</v-icon></v-list-item-icon><v-list-item-title>Crear / editar torneos</v-list-item-title>
+							</v-list-item>						
+							<!-- Gestión de los torneos-->
+							<v-list-item @click="setState('tournament')">
+								<v-list-item-icon><v-icon>mdi-sword-cross</v-icon></v-list-item-icon><v-list-item-title>Realizar torneo</v-list-item-title>
+							</v-list-item>						
+							<!-- otros -->
+							<v-list-item @click="setState('future')">
+								<v-list-item-icon><v-icon>mdi-thought-bubble</v-icon></v-list-item-icon><v-list-item-title>¿Quiza en el futuro?</v-list-item-title>
+							</v-list-item>
+						</v-list-item-group>
+					</v-list>
+				</v-navigation-drawer>
+				
+				<!-- PANTALLA DE VISUALZIACION -->
+				<v-row>
+					<v-col>
+						<!-- INICIO -->
+						<v-welcome class="mx-0 px-0" v-if="flow.state.welcome"></v-welcome>
+						<!-- EDICION DE TORNEOS -->
+						<v-create-tournament class="mx-0 px-0" v-if="flow.state.create"></v-create-tournament>
+						<!-- TORNEOS Y COMBATES -->
+						<v-tournaments class="mx-0 px-0" v-if="flow.state.tournament"></v-tournaments>
+						<!-- FUTURO -->
+						<v-future class="mx-0 px-0" v-if="flow.state.future"></v-future>
+					</v-col>
+				</v-row>
+
+			</v-container>
+		</v-main>
+		</v-app>
+
+	</div>
+	
+  </div>
+
+  <script src="./lib/vue/vue.js"></script>
+  <script src="./lib/vuetify/vuetify-v2.6.2.min.js"></script>
+
+  <!-- Añadimos los componentes -->
+  <script src="./resources/components/welcome.js"></script>
+  <script src="./resources/components/create-tournament.js"></script>
+  <script src="./resources/components/tournaments.js"></script>
+  <script src="./resources/components/combats.js"></script>
+  <script src="./resources/components/future.js"></script>
+  <script src="./resources/components/checking.js"></script>
+  <script src="./resources/components/combat.js"></script>
+  <script src="./resources/js/app.js"></script>  
+
+  <script>
+	if('serviceWorker' in navigator) {
+    	navigator.serviceWorker.register('./sw.js');
+	};
+  </script>
+
+</body>
+</html>
